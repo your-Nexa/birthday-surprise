@@ -1,46 +1,87 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const music = document.getElementById("music");
+    const moonButton = document.getElementById("moonButton");
+    const moon = document.getElementById("moon");
+    const intro = document.getElementById("intro");
+    const wishArea = document.getElementById("wishArea");
+    const shootingStar = document.getElementById("shootingStar");
+    const sendWish = document.getElementById("sendWish");
+    const wishInput = document.getElementById("wishInput");
+    const result = document.getElementById("result");
+    const wishText = document.getElementById("wishText");
+    const wishPopup = document.getElementById("wishPopup");
+    const closeWish = document.getElementById("closeWish");
+    const nextButton = document.getElementById("nextButton");
+    const wishStar = document.getElementById("wishStar");
+    const magicParticles = document.getElementById("magicParticles");
 
-    if (music) {
-        music.play().catch(function(err){
-            console.log("Autoplay blocked", err);
-        });
+    function openWishPage() {
+        if (!wishArea.hidden) return;
+
+        intro.hidden = true;
+        wishArea.hidden = false;
+
+        shootingStar.classList.remove("fly");
+        void shootingStar.offsetWidth;
+        shootingStar.classList.add("fly");
     }
 
-}
+    moonButton.addEventListener("click", openWishPage);
+    moon.addEventListener("click", openWishPage);
 
-function openGift(){
+    function celebrate() {
+        document.body.classList.add("wish-complete");
 
-const gift=document.getElementById("gift");
-const status=document.getElementById("status");
+        const symbols = ["✨", "💖", "⭐", "🌸", "💫", "🤍"];
 
-gift.onclick=null;
+        for (let i = 0; i < 55; i++) {
+            const particle = document.createElement("span");
+            particle.textContent =
+                symbols[Math.floor(Math.random() * symbols.length)];
 
-status.innerHTML="✨ Opening your surprise...";
+            particle.style.left = Math.random() * 100 + "%";
+            particle.style.setProperty("--duration", (3 + Math.random() * 4) + "s");
+            particle.style.setProperty("--delay", (Math.random() * 2) + "s");
+            particle.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
 
-gift.classList.add("shake");
+            magicParticles.appendChild(particle);
+        }
 
-setTimeout(()=>{
+        setTimeout(() => {
+            magicParticles.innerHTML = "";
+        }, 8000);
+    }
 
-gift.classList.remove("shake");
+    sendWish.addEventListener("click", function () {
+        const wish = wishInput.value.trim();
 
-gift.classList.add("open");
+        if (!wish) {
+            wishInput.placeholder = "প্রথমে তোমার ইচ্ছেটা লিখো... 💗";
+            wishInput.focus();
+            return;
+        }
 
-},900);
+        wishText.textContent = "“" + wish + "”";
 
-setTimeout(()=>{
+        wishArea.hidden = true;
+        result.hidden = false;
 
-gift.style.transition="all .8s ease";
-gift.style.transform="scale(1.8)";
-gift.style.opacity="0";
+        // Show the third star only after wish is sent
+        wishStar.hidden = false;
 
-},1700);
+        celebrate();
+    });
 
-setTimeout(()=>{
+    wishStar.addEventListener("click", function () {
+        wishPopup.hidden = false;
+    });
 
-window.location.href="birthday.html";
+    closeWish.addEventListener("click", function () {
+        wishPopup.hidden = true;
+    });
 
-},2600);
+    nextButton.addEventListener("click", function () {
+        window.location.href = "birthday.html";
+    });
 
-}
+});

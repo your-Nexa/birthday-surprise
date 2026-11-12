@@ -3,20 +3,7 @@ const gallery = document.getElementById("gallery");
 const currentPhoto = document.getElementById("currentPhoto");
 const totalPhoto = document.getElementById("totalPhoto");
 
-const music = document.getElementById("galleryMusic");
 
-// Gallery খুললেই গান শুরু
-window.addEventListener("load", () => {
-
-    if (music) {
-
-        music.volume = 0.6;
-
-        music.play().catch(() => {});
-
-    }
-
-});
 
 const messages = [
 
@@ -176,6 +163,7 @@ gallery.appendChild(end);
 
 document.getElementById("nextStory").onclick = function(){
 
+    sessionStorage.setItem("playFinalMusic", "yes");
     location.href="final.html";
 
 };

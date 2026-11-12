@@ -2,11 +2,17 @@ const music = document.getElementById("finalMusic");
 
 window.addEventListener("load", () => {
 
-    if (music) {
+    const allowed = sessionStorage.getItem("playFinalMusic");
+
+    if (music && allowed === "yes") {
+
+        sessionStorage.removeItem("playFinalMusic");
 
         music.volume = 0.6;
 
-        music.play().catch(() => {});
+        music.play().catch(() => {
+            console.log("Browser requires a user tap to play music.");
+        });
 
     }
 

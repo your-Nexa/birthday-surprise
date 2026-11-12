@@ -1,98 +1,83 @@
-let attempts = 0;
-
-const correctPassword = "1458";
-
 function checkPassword(){
 
-const input = document.getElementById("password").value.trim();
+    const input = document.getElementById("password").value
+        .trim().toLowerCase()
+        .replace(/[\s\p{P}\p{S}]+/gu, "");
 
-const message = document.getElementById("message");
+    const message = document.getElementById("message");
+    const hint = document.getElementById("hint");
 
-const hint = document.getElementById("hint");
+    const noAnswers = [
+        "না", "নাই", "নাহ", "নানা",
+        "na", "naa", "nah", "no", "nope"
+    ];
 
-if(input === correctPassword){
+    const yesAnswers = [
+        "হ্যাঁ", "হ্যা", "হুম",
+        "ha", "haa", "hmm", "yes", "yeah", "yup"
+    ];
 
-message.style.color="#7CFC00";
+    let response = "";
 
-message.innerHTML="❤️ আমি জানতাম তুমি পারবে...";
+    if(noAnswers.includes(input)){
 
-const loading = document.getElementById("loadingScreen");
-loading.style.display = "flex";
+        response = "❤️ আমি জানতাম তুমি না-ই বলবে। সমস্যা নেই, এখন ভিতরে আসো। 🌸";
 
-let percent=0;
+    } else if(yesAnswers.includes(input)){
 
-const fill=document.getElementById("loaderFill");
+        response = "🥺 আমি জানতাম তুমি আমাকে ভালোবাসো। আমি এখনো তোমার অপেক্ষায় আছি। ফিরে এসো... ❤️";
 
-const text=document.getElementById("loaderText");
+    } else {
 
-const timer=setInterval(()=>{
+        message.style.color = "#ff6961";
+        message.innerHTML = "🥺 দয়া করে হ্যাঁ অথবা না লিখে উত্তর দাও।";
+        return;
+    }
 
-percent++;
+    message.style.color = "#ffb6c1";
+    message.innerHTML = response;
+    hint.innerHTML = "";
 
-fill.style.width=percent+"%";
+    document.getElementById("password").disabled = true;
 
-text.innerHTML=percent+"%";
+    const button = document.querySelector(".lock-box button");
+    if(button) button.disabled = true;
 
-if(percent>=100){
+    // আগে মেসেজ দেখাবে
+    setTimeout(() => {
 
-clearInterval(timer);
+        const loading = document.getElementById("loadingScreen");
+        loading.style.display = "flex";
 
-location.href="gallery.html";
+        let percent = 0;
 
+        const fill = document.getElementById("loaderFill");
+        const text = document.getElementById("loaderText");
+
+        const timer = setInterval(() => {
+
+            percent++;
+
+            if(fill) fill.style.width = percent + "%";
+            if(text) text.innerHTML = percent + "%";
+
+            if(percent >= 100){
+
+                clearInterval(timer);
+                location.href = "gallery.html";
+
+            }
+
+        }, 25);
+
+    }, 3500);
 }
 
-},25);
-
-return;
-
-}
-
-attempts++;
-
-if(attempts===1){
-
-message.style.color="#ffb347";
-
-message.innerHTML="🙂 উফ... মনে হয় একটু ভুল হয়েছে। আরেকবার ভাবো।";
-
-}
-
-else if(attempts===2){
-
-message.style.color="#ffd700";
-
-message.innerHTML="💖 তুমি খুব কাছাকাছি আছো... আর একবার চেষ্টা করো।";
-
-}
-
-else{
-
-message.style.color="#ff6961";
-
-message.innerHTML="❤️ উত্তরটা মনে না থাকলেও কোনো সমস্যা নেই।";
-
-hint.innerHTML=`
-<hr style="margin:20px 0;border-color:#ffffff33">
-
-<b>সঠিক উত্তর:</b> ${correctPassword} দিন ❤️
-
-<br><br>
-
-এতদিন ধরেই আমি তোমার অপেক্ষায় আছি...
-
-<br><br>
-
-তুমি চাইলে এখন এই উত্তরটাই লিখে Gallery Unlock করতে পারো। 🌸
-`;
-
-}
-
-}
 const passwordInput = document.getElementById("password");
 
-if (passwordInput) {
-    passwordInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
+if(passwordInput){
+    passwordInput.addEventListener("keydown", function(event){
+        if(event.key === "Enter"){
             checkPassword();
         }
     });
