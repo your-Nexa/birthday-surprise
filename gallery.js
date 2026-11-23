@@ -151,7 +151,7 @@ Happy Birthday Again... 🎂💖
 
 <button id="nextStory">
 
-💌 তোমার জন্য কিছু কথা...
+Next ➡️
 
 </button>
 
