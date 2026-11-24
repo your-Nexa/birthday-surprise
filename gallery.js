@@ -164,7 +164,7 @@ gallery.appendChild(end);
 document.getElementById("nextStory").onclick = function(){
 
     sessionStorage.setItem("playFinalMusic", "yes");
-    location.href="final.html";
+    location.href="story.html";
 
 };
 
