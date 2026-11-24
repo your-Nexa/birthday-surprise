@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const wishArea = document.getElementById("wishArea");
     const shootingStar = document.getElementById("shootingStar");
     const sendWish = document.getElementById("sendWish");
+    const skipWish = document.getElementById("skipWish");
     const wishInput = document.getElementById("wishInput");
     const result = document.getElementById("result");
+    const resultHeading = document.getElementById("resultHeading");
+    const starInstruction = document.getElementById("starInstruction");
     const wishText = document.getElementById("wishText");
     const wishPopup = document.getElementById("wishPopup");
     const closeWish = document.getElementById("closeWish");
@@ -36,13 +39,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (let i = 0; i < 55; i++) {
             const particle = document.createElement("span");
+
             particle.textContent =
                 symbols[Math.floor(Math.random() * symbols.length)];
 
             particle.style.left = Math.random() * 100 + "%";
-            particle.style.setProperty("--duration", (3 + Math.random() * 4) + "s");
-            particle.style.setProperty("--delay", (Math.random() * 2) + "s");
-            particle.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
+            particle.style.setProperty(
+                "--duration",
+                (3 + Math.random() * 4) + "s"
+            );
+            particle.style.setProperty(
+                "--delay",
+                (Math.random() * 2) + "s"
+            );
+            particle.style.setProperty(
+                "--drift",
+                (Math.random() * 180 - 90) + "px"
+            );
 
             magicParticles.appendChild(particle);
         }
@@ -52,34 +65,72 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 8000);
     }
 
+    // Show result after Send or Skip
+    function showResult(wish) {
+
+        wishArea.hidden = true;
+        result.hidden = false;
+        wishPopup.hidden = true;
+
+        if (wish) {
+
+            // Save wish
+            localStorage.setItem("anamikaWish", wish);
+
+            wishText.textContent = "“" + wish + "”";
+
+            resultHeading.textContent =
+                "Your Wish Is In The Stars ✨";
+
+            starInstruction.hidden = false;
+            wishStar.hidden = false;
+
+        } else {
+
+            // Skip without saving a new wish
+            resultHeading.textContent =
+                "A Little Surprise Awaits ✨";
+
+            starInstruction.hidden = true;
+            wishStar.hidden = true;
+
+        }
+
+        celebrate();
+    }
+
+    // Send button
     sendWish.addEventListener("click", function () {
+
         const wish = wishInput.value.trim();
 
         if (!wish) {
-            wishInput.placeholder = "প্রথমে তোমার ইচ্ছেটা লিখো... 💗";
+            wishInput.placeholder =
+                "প্রথমে তোমার ইচ্ছেটা লিখো... 💗";
+
             wishInput.focus();
             return;
         }
 
-        wishText.textContent = "“" + wish + "”";
-
-        wishArea.hidden = true;
-        result.hidden = false;
-
-        // Show the third star only after wish is sent
-        wishStar.hidden = false;
-
-        celebrate();
+        showResult(wish);
     });
 
+    // Skip button
+    skipWish.addEventListener("click", function () {
+        showResult("");
+    });
+
+    // Open wish popup by clicking star
     wishStar.addEventListener("click", function () {
         wishPopup.hidden = false;
     });
 
+    // Close wish popup
     closeWish.addEventListener("click", function () {
         wishPopup.hidden = true;
     });
 
+    // One Last Surprise button
     nextButton.addEventListener("click", function () {
         window.location.href = "birthday.html";
     });

@@ -1,0 +1,602 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, "Trebuchet MS", sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 50% 45%, #40205e 0%, transparent 55%),
+        linear-gradient(160deg, #09051b, #19082f 55%, #351052);
+}
+
+.stars, .twinkle {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.stars {
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 25% 75%, #ffd9f0, transparent),
+        radial-gradient(3px 3px at 75% 20%, #fff, transparent),
+        radial-gradient(2px 2px at 90% 65%, #fff, transparent),
+        radial-gradient(2px 2px at 50% 50%, #ffd6eb, transparent),
+        radial-gradient(2px 2px at 65% 85%, #fff, transparent),
+        radial-gradient(2px 2px at 35% 35%, #fff, transparent);
+    background-size: 350px 350px;
+    animation: starMove 35s linear infinite;
+}
+
+.twinkle {
+    background-image:
+        radial-gradient(1px 1px at 20% 40%, white, transparent),
+        radial-gradient(2px 2px at 60% 15%, white, transparent),
+        radial-gradient(1px 1px at 85% 45%, white, transparent),
+        radial-gradient(2px 2px at 40% 90%, white, transparent);
+    background-size: 230px 250px;
+    animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes starMove {
+    to { background-position: 350px 350px; }
+}
+
+@keyframes twinkle {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+.moon-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(183, 120, 255, .13);
+    filter: blur(65px);
+    pointer-events: none;
+}
+
+.scene {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px 18px 55px;
+}
+
+.moon {
+    width: 115px;
+    height: 115px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 0 50px rgba(255,220,160,.18);
+    animation: moonFloat 4s ease-in-out infinite;
+}
+
+.moon span {
+    font-size: 72px;
+    filter: drop-shadow(0 0 22px #ffe6a0);
+}
+
+@keyframes moonFloat {
+    50% { transform: translateY(-12px); }
+}
+
+.intro {
+    max-width: 440px;
+    animation: appear 1.2s ease;
+}
+
+.tiny-label {
+    color: #e8b9ff;
+    letter-spacing: 4px;
+    font: 11px Arial, sans-serif;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(40px, 10vw, 57px);
+    color: #ffd8ec;
+    text-shadow: 0 0 25px rgba(255,117,191,.7);
+    margin-bottom: 17px;
+}
+
+.intro p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #f1dffb;
+    margin-bottom: 28px;
+}
+
+button {
+    border: 1px solid rgba(255,255,255,.35);
+    background: linear-gradient(135deg,#ff9acb,#bd73ed);
+    color: white;
+    padding: 15px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 28px rgba(255,104,184,.3);
+    transition: transform .25s, box-shadow .25s;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+.wish-area {
+    width: 100%;
+    max-width: 440px;
+    animation: appear 1s ease;
+}
+
+.wish-card {
+    padding: 28px 21px;
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,.2);
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 65px rgba(0,0,0,.3);
+}
+
+.sparkle {
+    color: #ffd9a6;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.wish-card h2, .result h2 {
+    color: #ffd6e9;
+    font-size: 27px;
+    margin-bottom: 16px;
+    text-shadow: 0 0 15px rgba(255,120,190,.5);
+}
+
+.wish-card p {
+    color: #f3e4fa;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    height: 110px;
+    padding: 15px;
+    resize: none;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    outline: none;
+    background: rgba(15,5,35,.55);
+    color: white;
+    font: 15px Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+textarea::placeholder {
+    color: #d5b9e4;
+}
+
+.shooting-star {
+    position: fixed;
+    top: 18%;
+    left: -100px;
+    width: 100px;
+    height: 3px;
+    opacity: 0;
+    background: linear-gradient(90deg,transparent,#fff,#ffd8ee);
+    box-shadow: 0 0 15px #fff, 0 0 30px #ff8bc7;
+    transform: rotate(-25deg);
+    pointer-events: none;
+}
+
+.shooting-star.fly {
+    animation: shooting 1.5s ease-out forwards;
+}
+
+@keyframes shooting {
+    0% { left: -100px; opacity: 0; }
+    20% { opacity: 1; }
+    100% { left: 120%; opacity: 0; }
+}
+
+.result {
+    max-width: 440px;
+    animation: appear 1.3s ease;
+}
+
+.heart-stars {
+    font-size: 90px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 25px #ff65b5);
+    animation: heartbeat 1.4s infinite;
+}
+
+@keyframes heartbeat {
+    50% { transform: scale(1.16); }
+}
+
+.result h2 {
+    font-size: 27px;
+    line-height: 1.4;
+}
+
+#wishText {
+    color: #ffe2f1;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    margin: 15px 0;
+}
+
+.blessing {
+    color: #f4d9f8;
+    line-height: 1.9;
+    margin: 20px 0 28px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+    color: #c8a6d8;
+    font: 12px Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-height: 650px) {
+    .scene { padding-top: 12px; padding-bottom: 45px; }
+    .moon { width: 85px; height: 85px; margin-bottom: 15px; }
+    .moon span { font-size: 55px; }
+    h1 { font-size: 38px; }
+    .wish-card { padding: 18px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+
+/* Moon and ME star sky layout */
+.sky-pair {
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 65px;
+    margin: 0 auto 25px;
+    position: relative;
+}
+
+.celestial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+}
+
+.moon {
+    margin: 0;
+    animation: moonFloat 4s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.moon span {
+    font-size: 76px;
+    filter: drop-shadow(0 0 22px #ffe6a0);
+}
+
+.star span {
+    font-size: 48px;
+    filter: drop-shadow(0 0 14px #ffd85c);
+    animation: starPulse 2s ease-in-out infinite;
+}
+
+.celestial small {
+    color: #f8d8ef;
+    font: 11px Arial, sans-serif;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ff8ac8;
+}
+
+.star.wish-made span {
+    animation: wishStar 1s ease-in-out infinite alternate;
+}
+
+@keyframes starPulse {
+    50% { transform: scale(1.18); }
+}
+
+@keyframes wishStar {
+    from {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #ffd85c);
+    }
+    to {
+        transform: scale(1.5);
+        filter: drop-shadow(0 0 30px #fff3a0);
+    }
+}
+
+@media(max-width:380px) {
+    .sky-pair {
+        gap: 45px;
+    }
+}
+
+/* Final moon and star positions */
+.sky-pair {
+    position: absolute;
+    top: 8%;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    padding: 0 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.celestial {
+    pointer-events: auto;
+}
+
+.moon {
+    margin: 0;
+    transform: rotate(180deg);
+    cursor: pointer;
+    animation: moonFloat 4s ease-in-out infinite;
+}
+
+.moon span {
+    font-size: 85px;
+}
+
+.moon small {
+    transform: rotate(180deg);
+}
+
+.star {
+    display: none;
+    cursor: pointer;
+    margin-top: 75px;
+    animation: starAppear 1.2s ease forwards;
+}
+
+.star.revealed {
+    display: flex;
+}
+
+.star span {
+    color: white;
+    font-size: 52px;
+    filter:
+        brightness(0) invert(1)
+        drop-shadow(0 0 8px white)
+        drop-shadow(0 0 22px #b9dfff);
+}
+
+.star small {
+    color: white;
+}
+
+@keyframes starAppear {
+    from {
+        opacity: 0;
+        transform: scale(.1) rotate(-90deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* Wish completion celebration */
+body.wish-complete .stars {
+    animation: starCelebrate 1.2s ease-in-out infinite alternate;
+}
+
+body.wish-complete .twinkle {
+    animation-duration: .7s;
+}
+
+@keyframes starCelebrate {
+    from { opacity: .5; }
+    to { opacity: 1; }
+}
+
+.magic-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.magic-particles span {
+    position: absolute;
+    bottom: -30px;
+    font-size: 22px;
+    animation: particleFly var(--duration) ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes particleFly {
+    0% {
+        transform: translateY(0) scale(.4) rotate(0);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-110vh) translateX(var(--drift))
+                   scale(1.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.wish-popup {
+    position: fixed;
+    z-index: 50;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(88%, 360px);
+    padding: 28px 22px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 25px;
+    background: linear-gradient(145deg,#3b1959,#180b35);
+    box-shadow: 0 0 55px rgba(255,130,210,.45);
+    animation: appear .5s ease;
+}
+
+.wish-popup h2 {
+    color: #ffd7ec;
+    margin: 12px 0;
+}
+
+#wishText {
+    color: white;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    margin: 15px 0 22px;
+}
+
+.popup-sparkle {
+    font-size: 25px;
+}
+
+.star-instruction {
+    color: #f5dffb;
+    line-height: 1.8;
+    margin: 18px 0;
+}
+
+.result {
+    padding-top: 100px;
+}
+
+.result .blessing {
+    margin-top: 25px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media(max-width:380px) {
+    .sky-pair {
+        padding: 0 12%;
+        top: 7%;
+    }
+
+    .moon span {
+        font-size: 72px;
+    }
+
+    .star {
+        margin-top: 65px;
+    }
+
+    .result {
+        padding-top: 85px;
+    }
+}
+
+/* Keep original moon direction - no rotation */
+.moon {
+    transform: none !important;
+}
+
+.moon span {
+    transform: none !important;
+}
+
+.moon small {
+    transform: none !important;
+}
+
+/* The first ME star stays visible from the beginning */
+.sky-pair .star {
+    display: flex;
+    visibility: visible;
+}
+
+/* A separate third star appears only after sending a wish */
+.wish-star {
+    position: fixed;
+    top: 43%;
+    right: 15%;
+    z-index: 30;
+    width: 65px;
+    height: 65px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: 48px;
+    box-shadow: none;
+    filter: drop-shadow(0 0 12px white)
+            drop-shadow(0 0 25px #b9dfff);
+    animation: newWishStar 1.3s ease-in-out infinite alternate;
+}
+
+.wish-star[hidden] {
+    display: none !important;
+}
+
+@keyframes newWishStar {
+    from { transform: scale(.9); filter: drop-shadow(0 0 8px white); }
+    to { transform: scale(1.2); filter: drop-shadow(0 0 25px white); }
+}
+
+@media(max-width:380px) {
+    .wish-star {
+        right: 12%;
+        top: 42%;
+    }
+}

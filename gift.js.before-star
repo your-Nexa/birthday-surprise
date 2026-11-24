@@ -1,0 +1,55 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    const moonButton = document.getElementById("moonButton");
+    const moon = document.getElementById("moon");
+    const intro = document.getElementById("intro");
+    const wishArea = document.getElementById("wishArea");
+    const shootingStar = document.getElementById("shootingStar");
+    const sendWish = document.getElementById("sendWish");
+    const wishInput = document.getElementById("wishInput");
+    const result = document.getElementById("result");
+    const wishText = document.getElementById("wishText");
+    const nextButton = document.getElementById("nextButton");
+
+    // Moon tap
+    function openWish() {
+
+        if (wishArea.hidden === false) return;
+
+        intro.hidden = true;
+        wishArea.hidden = false;
+
+        shootingStar.classList.remove("fly");
+        void shootingStar.offsetWidth;
+        shootingStar.classList.add("fly");
+
+    }
+
+    moonButton.addEventListener("click", openWish);
+    moon.addEventListener("click", openWish);
+    moon.style.cursor = "pointer";
+
+    // Send wish
+    sendWish.addEventListener("click", function () {
+
+        const wish = wishInput.value.trim();
+
+        if (!wish) {
+            wishInput.placeholder = "প্রথমে তোমার ইচ্ছেটা লিখো... 💗";
+            wishInput.focus();
+            return;
+        }
+
+        wishText.textContent = "“" + wish + "”";
+
+        wishArea.hidden = true;
+        result.hidden = false;
+
+    });
+
+    // Next page
+    nextButton.addEventListener("click", function () {
+        window.location.href = "birthday.html";
+    });
+
+});

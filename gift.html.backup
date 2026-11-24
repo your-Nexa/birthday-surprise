@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta name="google" content="notranslate">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make a Wish ✨</title>
+<link rel="stylesheet" href="gift.css?v=7">
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="twinkle"></div>
+<div class="moon-glow"></div>
+
+<div class="scene">
+
+    <div class="sky-pair">
+        <div class="celestial moon" id="moon">
+            <span>🌙</span>
+            <small>YOU</small>
+        </div>
+
+        <div class="celestial star" id="star">
+            <span>⭐</span>
+            <small>ME</small>
+        </div>
+    </div>
+
+    <button class="wish-star" id="wishStar" hidden aria-label="Open your wish">
+        ★
+    </button>
+
+    <div class="intro" id="intro">
+        <div class="tiny-label">A LITTLE MAGIC FOR YOU</div>
+
+        <h1>Make a Wish</h1>
+
+        <p>
+            Close your eyes, make a wish,<br>
+            and believe in magic...
+        </p>
+
+        <button id="moonButton">🌙 Tap the Moon</button>
+    </div>
+
+    <div class="wish-area" id="wishArea" hidden>
+
+        <div class="shooting-star" id="shootingStar"></div>
+
+        <div class="wish-card">
+            <div class="sparkle">✧ ✨ ✧</div>
+
+            <h2>✨ Make a Wish ✨</h2>
+
+            <p>
+                Anamika, তোমার মনের ইচ্ছেটা<br>
+                এখানে লিখে রাখো... 💗
+            </p>
+
+            <textarea
+                id="wishInput"
+                placeholder="Write your wish here... 💌"
+                maxlength="250"
+            ></textarea>
+
+            <button id="sendWish">Send 🌠</button>
+        </div>
+
+    </div>
+
+    <div class="result" id="result" hidden>
+        <h2>Your Wish Is In The Stars ✨</h2>
+
+        <p class="star-instruction">
+            তোমার Wish এখন আকাশের একটি তারার মধ্যে আছে।<br>
+            ⭐ তারাটিতে ট্যাপ করো।
+        </p>
+
+        <div class="wish-popup" id="wishPopup" hidden>
+            <div class="popup-sparkle">✨ 💗 ✨</div>
+            <h2>Your Secret Wish</h2>
+            <p id="wishText"></p>
+            <button id="closeWish">Close 💕</button>
+        </div>
+
+        <p class="blessing">
+            তোমার প্রতিটি ইচ্ছা পূরণ হোক।<br>
+            তোমার জীবনটা সবসময় হাসি আর ভালোবাসায় ভরে থাকুক। ❤️
+        </p>
+
+        <button id="nextButton">
+            💖 One Last Surprise
+        </button>
+    </div>
+
+    <div class="magic-particles" id="magicParticles"></div>
+<div class="footer">Made with love, just for you ❤️</div>
+
+</div>
+
+<script src="gift.js?v=5"></script>
+</body>
+</html>

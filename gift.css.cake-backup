@@ -1,0 +1,386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 14px;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: white;
+    position: relative;
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(255,76,158,.28), transparent 48%),
+        radial-gradient(ellipse at 10% 90%, rgba(126,45,220,.5), transparent 45%),
+        linear-gradient(145deg,#10051f,#290b43 48%,#48105e);
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(75px);
+    opacity: .35;
+    pointer-events: none;
+}
+
+body::before {
+    background: #ff3e9d;
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    background: #8c42ff;
+    bottom: -120px;
+    right: -100px;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 470px;
+    padding: 30px 20px 27px;
+    border: 1px solid rgba(255,255,255,.17);
+    border-radius: 30px;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.13),
+        rgba(255,255,255,.045)
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.16);
+}
+
+h1 {
+    font-size: clamp(27px,7vw,38px);
+    line-height: 1.25;
+    color: #ffd4e7;
+    margin-bottom: 13px;
+    text-shadow: 0 0 22px rgba(255,91,165,.7);
+}
+
+#instruction {
+    color: #ffe5f0;
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 auto 8px;
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 12% 20%,white,transparent),
+        radial-gradient(2px 2px at 80% 15%,#ffd6ed,transparent),
+        radial-gradient(3px 3px at 30% 70%,white,transparent),
+        radial-gradient(2px 2px at 90% 75%,white,transparent),
+        radial-gradient(2px 2px at 55% 45%,#ffc5e2,transparent),
+        radial-gradient(2px 2px at 18% 88%,white,transparent);
+    animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .35; }
+    to { opacity: 1; }
+}
+
+.glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle,rgba(255,90,170,.2),transparent 70%);
+    animation: glow 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glow {
+    50% {
+        transform: translate(-50%,-50%) scale(1.25);
+        opacity: .55;
+    }
+}
+
+.cake-area {
+    position: relative;
+    width: 100%;
+    height: 290px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto 0;
+}
+
+.cake {
+    position: relative;
+    width: 270px;
+    height: 220px;
+    cursor: pointer;
+    filter: drop-shadow(0 15px 20px rgba(255,65,150,.24));
+    transition: transform .3s;
+    z-index: 2;
+}
+
+.cake:active {
+    transform: scale(.97);
+}
+
+.candles {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 27px;
+    z-index: 5;
+}
+
+.candle {
+    position: relative;
+    width: 13px;
+    height: 48px;
+    border-radius: 5px 5px 2px 2px;
+    background: repeating-linear-gradient(
+        135deg,#fff 0px,#fff 5px,#ff72a9 5px,#ff72a9 10px
+    );
+    box-shadow: 0 0 9px rgba(255,255,255,.4);
+}
+
+.flame {
+    position: absolute;
+    width: 15px;
+    height: 23px;
+    background: linear-gradient(#fffbd0,#ffd23f,#ff7043);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    top: -25px;
+    left: -1px;
+    transform-origin: bottom;
+    animation: flicker .55s infinite alternate;
+    box-shadow: 0 0 12px #ffb52e, 0 0 25px rgba(255,170,30,.65);
+}
+
+@keyframes flicker {
+    from { transform: rotate(-45deg) scale(1); }
+    to { transform: rotate(-39deg) scale(.84); }
+}
+
+.cake-top {
+    position: absolute;
+    top: 57px;
+    left: 30px;
+    width: 210px;
+    height: 43px;
+    border-radius: 50%;
+    background: linear-gradient(145deg,#ffc3df,#ff75b5);
+    border: 5px solid #fff0f7;
+    box-shadow: 0 0 18px rgba(255,170,210,.4);
+    z-index: 4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+}
+
+.cream {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#ff9ac9,#ff6ca8);
+}
+
+.cake-top span {
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 3px rgba(130,0,60,.2));
+}
+
+.cake-body {
+    position: absolute;
+    top: 78px;
+    left: 30px;
+    width: 210px;
+    height: 94px;
+    background: linear-gradient(90deg,#f64b91,#ff9bc5 48%,#ed438b);
+    border-radius: 0 0 17px 17px;
+    border: 3px solid #ffc1dc;
+    border-top: 0;
+    z-index: 3;
+    box-shadow: inset 0 -8px 15px rgba(190,20,90,.12);
+}
+
+.icing {
+    position: absolute;
+    top: -4px;
+    left: -3px;
+    width: 210px;
+    height: 17px;
+    background: linear-gradient(#fff9fc,#ffe1ef);
+    border-radius: 50%;
+}
+
+.drips {
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    width: 180px;
+    height: 18px;
+    background:
+        radial-gradient(ellipse at 15% 0%,#fff0f7 0 45%,transparent 48%),
+        radial-gradient(ellipse at 50% 0%,#fff0f7 0 45%,transparent 48%),
+        radial-gradient(ellipse at 85% 0%,#fff0f7 0 45%,transparent 48%);
+}
+
+.cake-bottom {
+    position: absolute;
+    top: 165px;
+    left: 20px;
+    width: 230px;
+    height: 23px;
+    background: linear-gradient(#ffb0d0,#ff78ae);
+    border-radius: 50%;
+    border-bottom: 4px solid #fff0f6;
+    z-index: 2;
+    box-shadow: 0 7px 15px rgba(0,0,0,.15);
+}
+
+.plate {
+    position: absolute;
+    bottom: 27px;
+    width: 285px;
+    height: 23px;
+    border-radius: 50%;
+    background: linear-gradient(#fff,#ffd1e5);
+    box-shadow: 0 8px 22px rgba(0,0,0,.25),0 0 15px rgba(255,180,215,.3);
+}
+
+.cake-slice {
+    position: absolute;
+    top: 88px;
+    right: 30px;
+    width: 90px;
+    height: 85px;
+    background: linear-gradient(135deg,#ffe0ed,#ff6da6);
+    clip-path: polygon(0 0,100% 50%,0 100%);
+    opacity: 0;
+    z-index: 6;
+    transition: transform 1s,opacity .5s;
+}
+
+.knife {
+    position: absolute;
+    top: 42px;
+    right: 35px;
+    font-size: 30px;
+    opacity: 0;
+    z-index: 8;
+    transform: rotate(-45deg);
+}
+
+.cake.cutting .knife {
+    opacity: 1;
+    animation: cutCake .9s forwards;
+}
+
+@keyframes cutCake {
+    0% { transform: translate(50px,-30px) rotate(-45deg); }
+    100% { transform: translate(-100px,90px) rotate(-45deg); }
+}
+
+.cake.cut .cake-slice {
+    opacity: 1;
+    transform: translate(65px,20px) rotate(12deg);
+}
+
+.cake.cut .cake-body {
+    clip-path: polygon(0 0,100% 0,75% 100%,0 100%);
+}
+
+.cake.extinguished .flame {
+    display: none;
+}
+
+#status {
+    color: #ffe0ef;
+    min-height: 48px;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 auto 5px;
+    text-shadow: 0 0 10px rgba(255,150,200,.35);
+}
+
+#nextButton {
+    border: 1px solid rgba(255,255,255,.4);
+    background: linear-gradient(135deg,#ff8cbd,#ff3f91);
+    color: white;
+    padding: 15px 32px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255,50,135,.35);
+    animation: appear .8s ease;
+}
+
+#nextButton[hidden] {
+    display: none;
+}
+
+#nextButton:active {
+    transform: scale(.95);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width:380px) {
+    .container {
+        padding: 25px 12px;
+    }
+
+    .cake {
+        transform: scale(.88);
+    }
+
+    .cake:active {
+        transform: scale(.85);
+    }
+
+    .cake-area {
+        height: 265px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}

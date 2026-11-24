@@ -1,0 +1,63 @@
+const cake = document.getElementById("cake");
+const status = document.getElementById("status");
+const instruction = document.getElementById("instruction");
+const nextButton = document.getElementById("nextButton");
+
+let candleOff = false;
+let cakeCut = false;
+
+cake.addEventListener("click", () => {
+
+    // প্রথম Tap: মোমবাতি নিভবে
+    if (!candleOff) {
+
+        candleOff = true;
+
+        cake.classList.add("extinguished");
+
+        instruction.textContent = "✨ Make a wish! ❤️";
+
+        status.textContent = "🎉 Your wish is on its way!";
+
+        return;
+    }
+
+    // দ্বিতীয় Tap: কেক কাটবে
+    if (!cakeCut) {
+
+        cakeCut = true;
+
+        instruction.textContent = "💖 Cutting your birthday cake!";
+
+        status.textContent = "🎂 Yummy! Happy Birthday!";
+
+        cake.classList.add("cutting");
+
+        setTimeout(() => {
+
+            cake.classList.add("cut");
+
+        }, 500);
+
+        setTimeout(() => {
+
+            cake.classList.remove("cutting");
+
+            status.textContent = "❤️ Enjoy your special day, Anamika!";
+
+            instruction.textContent = "🎉 Your cake is ready!";
+
+            nextButton.hidden = false;
+
+        }, 1500);
+
+    }
+
+});
+
+// পরের পেজে যাওয়ার বাটন
+nextButton.addEventListener("click", () => {
+
+    window.location.href = "birthday.html";
+
+});

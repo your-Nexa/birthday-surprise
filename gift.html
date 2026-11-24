@@ -5,7 +5,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Make a Wish ✨</title>
-<link rel="stylesheet" href="gift.css?v=7">
+<link rel="stylesheet" href="gift.css?v=8">
+
+<style>
+#skipWish {
+    display: block;
+    margin: 12px auto 0;
+    padding: 12px 30px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -64,15 +78,18 @@
                 maxlength="250"
             ></textarea>
 
-            <button id="sendWish">Send My Wish 🌠</button>
+            <button id="sendWish">Send 🌠</button>
+
+            <button id="skipWish">Skip 💫</button>
         </div>
 
     </div>
 
     <div class="result" id="result" hidden>
-        <h2>Your Wish Is In The Stars ✨</h2>
 
-        <p class="star-instruction">
+        <h2 id="resultHeading">Your Wish Is In The Stars ✨</h2>
+
+        <p class="star-instruction" id="starInstruction">
             তোমার Wish এখন আকাশের একটি তারার মধ্যে আছে।<br>
             ⭐ তারাটিতে ট্যাপ করো।
         </p>
@@ -90,15 +107,17 @@
         </p>
 
         <button id="nextButton">
-            💖 One Last Surprise
+            💖 Next ➡️
         </button>
+
     </div>
 
     <div class="magic-particles" id="magicParticles"></div>
-<div class="footer">Made with love, just for you ❤️</div>
+
+    <div class="footer">Made with love, just for you ❤️</div>
 
 </div>
 
-<script src="gift.js?v=5"></script>
+<script src="gift.js?v=8"></script>
 </body>
 </html>
